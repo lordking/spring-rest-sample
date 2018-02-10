@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.1.4/sockjs.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.min.js"></script>
+    <meta http-equiv="Access-Control-Allow-Origin" content="*">
+</head>
+<body>
+
+打开浏览器的控制台，在控制台上查看输出结果
+
+<script language="JavaScript">
+
+    var stompClient = null;
+    var socket = new SockJS('http://localhost:8080/sample/socket-js-port');
+    stompClient = Stomp.over(socket);
+    stompClient.connect({}, function (frame) {
+
+        console.log('Connected: ' + frame);
+
+        stompClient.subscribe('/topic/blog', function (msg) {
+           console.log(msg) ;
+        });
+    });
+
+</script>
+</body>
+</html>
